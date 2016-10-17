@@ -1,5 +1,7 @@
 # JvmGo
 
+>go version go1.7 windows/amd64
+
 ## 第一个版本正在施工
 
 ## 须知

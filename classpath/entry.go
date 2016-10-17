@@ -4,7 +4,9 @@ import (
 	"os"
 	"strings"
 )
-
+/**
+识别读取java依赖
+ */
 const pathListSeparator = string(os.PathListSeparator)
 
 type Entry interface {

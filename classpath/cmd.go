@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"os"
 )
-
+/**
+命令行处理实体类
+ */
 type Cmd struct {
 	HelpFlag    bool
 	VersionFlag bool
@@ -15,6 +17,7 @@ type Cmd struct {
 	Args        []string
 }
 
+//处理函数
 func ParseCmd() *Cmd {
 	cmd := &Cmd{}
 	flag.Usage = PrintUsage
