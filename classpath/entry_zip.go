@@ -47,5 +47,5 @@ func (self *ZipEntry)readClass(className string) ([]byte, Entry, error) {
 }
 
 func (self *ZipEntry)String() string {
-
+	return self.absPath
 }
