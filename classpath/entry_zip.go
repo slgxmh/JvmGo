@@ -21,6 +21,7 @@ func newZipEntry(path string) *ZipEntry {
 	return &ZipEntry{absPath}
 }
 
+//返回读取结果
 func (self *ZipEntry)readClass(className string) ([]byte, Entry, error) {
 	r, err := zip.OpenReader(self.absPath)
 	//若打开文件失败直接返回
@@ -46,6 +47,7 @@ func (self *ZipEntry)readClass(className string) ([]byte, Entry, error) {
 	return nil, nil, errors.New("class not found:" + className)
 }
 
+//返回路径
 func (self *ZipEntry)String() string {
 	return self.absPath
 }
