@@ -2,6 +2,7 @@ package classpath
 
 import (
 	"strings"
+	"errors"
 )
 /**
 复合地址
@@ -19,11 +20,13 @@ func newCompositeEntry(pathList string) CompositeEntry {
 
 //遍历读取每一个类
 func (self CompositeEntry) readClass(className string) ([] byte, Entry, error) {
-	strs := make([]string, len(self))
-	for i, entey := range self {
-		strs[i] = entey.String()
+	for _, entry := range self {
+		data, from, err := entry.readClass(className)
+		if err == nil {
+			return data, from, nil
+		}
 	}
-	return strings.Join(strs, pathListSeparator)
+	return nil, nil, errors.New("class not found: " + className)
 }
 
 func (self CompositeEntry)String() string {

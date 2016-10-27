@@ -8,20 +8,20 @@ import (
 
 func newWildcardEntry(path string) CompositeEntry {
 	baseDir := path[:len(path) - 1]//去掉结尾*号
-	CompositeEntry := []Entry{}
-	walkFn := func(path string, info os.FileInfo, err error) {
+	compositeEntry := []Entry{}
+	walkFn := func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
-		if info.IsDir()&&path != baseDir {
+		if info.IsDir() && path != baseDir {
 			return filepath.SkipDir
 		}
 		if strings.HasSuffix(path, ".jar") || strings.HasSuffix(path, ".JAR") {
 			jarEntry := newZipEntry(path)
-			CompositeEntry = append(CompositeEntry, jarEntry)
+			compositeEntry = append(compositeEntry, jarEntry)
 		}
 		return nil
 	}
-	filepath.Walk(baseDir, walkFn())
-	return CompositeEntry
+	filepath.Walk(baseDir, walkFn)
+	return compositeEntry
 }

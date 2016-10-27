@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"JvmGo/classpath"
+	"strings"
 )
 
 func main() {
@@ -17,6 +18,14 @@ func main() {
 }
 
 func startJVM(cmd *classpath.Cmd) {
-	fmt.Printf("classpath:%s class:%s args:%v\n",
-		cmd.CpOption, cmd.Class, cmd.Args)
+	cp := classpath.Parse(cmd.XjreOption, cmd.CpOption)
+	fmt.Printf("classpath:%v class:%v args:%v\n",
+		cp, cmd.Class, cmd.Args)
+	className := strings.Replace(cmd.Class, ".", "/", -1)
+	classData, _, err := cp.ReadClass(className)
+	if err != nil {
+		fmt.Printf("Could not find or load main class %s\n", cmd.Class)
+		return
+	}
+	fmt.Printf("class data:%v\n", classData)
 }
