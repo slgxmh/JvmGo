@@ -26,7 +26,6 @@ func Parse(classData []byte) (cf *ClassFile, err error) {
 			}
 		}
 	}()
-
 	cr := &ClassReader{classData}
 	cf = &ClassFile{}
 	cf.read(cr)
@@ -64,7 +63,6 @@ func (self *ClassFile) readAndCheckVersion(reader *ClassReader) {
 			return
 		}
 	}
-
 	panic("java.lang.UnsupportedClassVersionError!")
 }
 
